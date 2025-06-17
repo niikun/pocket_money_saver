@@ -28,12 +28,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "react-scripts start", 
-    "build": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=256' DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "build:light": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=256' DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=200' DISABLE_ESLINT_PLUGIN=true FAST_REFRESH=false react-scripts build",
+    "build:light": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=200' DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prebuild": "npm install framer-motion react-scripts typescript",
-    "postbuild": "npm uninstall framer-motion react-scripts typescript || true"
+    "prebuild": "npm install framer-motion react-scripts typescript --no-audit --no-fund",
+    "postbuild": "npm uninstall framer-motion react-scripts typescript --silent || true"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
