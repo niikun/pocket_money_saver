@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production (Renderデプロイ用にコメントアウト)
-# /build
+# production
+/build
 
 # misc
 .DS_Store
