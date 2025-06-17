@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: voice-piggy-bank
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm run build
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=400 --gc-interval=100
+      - key: NPM_CONFIG_PRODUCTION
+        value: false
+      - key: DISABLE_ESLINT_PLUGIN
+        value: true
+      - key: GENERATE_SOURCEMAP
+        value: false
+    disk:
+      name: voice-piggy-bank-disk
+      mountPath: /tmp
+      sizeGB: 1

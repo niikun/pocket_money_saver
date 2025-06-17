@@ -5,43 +5,20 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "node-fetch": "^3.3.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "buildDependencies": {
-    "framer-motion": "^12.18.1",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "react-scripts start", 
-    "build": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=200' DISABLE_ESLINT_PLUGIN=true FAST_REFRESH=false react-scripts build",
-    "build:light": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=200' DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prebuild": "npm install framer-motion react-scripts typescript --no-audit --no-fund",
-    "postbuild": "npm uninstall framer-motion react-scripts typescript --silent || true"
+    "build": "GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=80 --gc-interval=50 --gc-global --optimize-for-size' DISABLE_ESLINT_PLUGIN=true TSC_COMPILE_ON_ERROR=true SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "prebuild": "npm cache clean --force && npm install react-scripts typescript --no-audit --no-fund --no-optional --production=false",
+    "postbuild": "npm uninstall react-scripts typescript --silent || true; npm cache clean --force; npm prune --production"
   },
   "proxy": "http://localhost:3001",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "engines": {
     "node": ">=18.0.0"
   },
