@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -9,8 +10,33 @@ const PORT = process.env.PORT || 3002;
 app.use(cors());
 app.use(express.json());
 
+// ビルドディレクトリの確認とビルド実行
+const buildPath = path.join(__dirname, 'build');
+const indexPath = path.join(buildPath, 'index.html');
+
+console.log('🔍 Current directory:', __dirname);
+console.log('🔍 Expected build path:', buildPath);
+
+// buildディレクトリが存在しない、またはindex.htmlがない場合はビルドを実行
+if (!fs.existsSync(buildPath) || !fs.existsSync(indexPath)) {
+  console.log('⚠️ Build directory or index.html not found. Building...');
+  
+  // 同期的にビルドを実行
+  const { execSync } = require('child_process');
+  try {
+    console.log('🏗️ Running build command...');
+    execSync('npm run build', { stdio: 'inherit', cwd: __dirname });
+    console.log('✅ Build completed successfully');
+  } catch (error) {
+    console.error('❌ Build failed:', error.message);
+    process.exit(1);
+  }
+} else {
+  console.log('✅ Build directory found');
+}
+
 // 静的ファイル配信
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(buildPath));
 
 // OpenAI音声API プロキシ
 app.post('/api/speech', async (req, res) => {
