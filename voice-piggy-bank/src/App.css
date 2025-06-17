@@ -7,6 +7,69 @@
   text-align: center;
 }
 
+/* 軽量アニメーション */
+.character-emoji:hover {
+  transform: scale(1.1);
+}
+
+.character-emoji:active {
+  transform: scale(0.95);
+}
+
+.floating {
+  animation: float 2s ease-in-out infinite;
+}
+
+.listening {
+  animation: listening 1s ease-in-out infinite;
+}
+
+.speaking {
+  animation: speaking 0.5s ease-in-out infinite;
+}
+
+.sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.listening-indicator {
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+.speaking-indicator {
+  animation: pulse 0.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes listening {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes speaking {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-5px); opacity: 0.5; }
+  50% { transform: translateY(-15px); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
 /* ヘッダー */
 .app-header {
   margin-bottom: 30px;

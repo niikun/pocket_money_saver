@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-import AnimalCharacter from './components/AnimalCharacter';
+import LightAnimalCharacter from './components/LightAnimalCharacter';
 import { getCurrentStage, getNextStage, getProgressToNextStage, calculateHappiness } from './utils/evolutionSystem';
 import { SpeechRecognitionService, parseVoiceCommand, VoiceCommand } from './utils/speechUtils';
 import { HybridSpeechService } from './utils/openaiSpeech';
@@ -175,7 +175,7 @@ const App: React.FC = () => {
       </header>
 
       <main className="app-main">
-        <AnimalCharacter 
+        <LightAnimalCharacter 
           currentStage={currentStage}
           isListening={isListening}
           isSpeaking={isSpeaking}
