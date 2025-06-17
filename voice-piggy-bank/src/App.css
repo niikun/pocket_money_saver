@@ -1,0 +1,290 @@
+/* ベースのレイアウト */
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ヘッダー */
+.app-header {
+  margin-bottom: 30px;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin: 10px 0 0 0;
+}
+
+/* メインコンテンツ */
+.app-main {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* キャラクター関連 */
+.character-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* 貯金情報セクション */
+.savings-info {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.savings-display h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+}
+
+.evolution-progress {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.evolution-progress p {
+  margin: 10px 0;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #ecf0f1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 15px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 6px;
+  transition: width 0.8s ease-out;
+}
+
+.next-stage {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* コントロール部分 */
+.controls {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.voice-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  min-width: 200px;
+}
+
+.voice-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.voice-button:active {
+  transform: translateY(0px);
+}
+
+.voice-button.listening {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  animation: pulse 1.5s infinite;
+}
+
+.voice-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.status-message {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 15px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  min-height: 20px;
+  border: 2px solid rgba(52, 152, 219, 0.2);
+}
+
+/* 取引履歴セクション */
+.recent-transactions {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.recent-transactions h3 {
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.transaction:hover {
+  transform: translateY(-2px);
+}
+
+.transaction.savings {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border-left: 4px solid #28a745;
+}
+
+.transaction.spending {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  border-left: 4px solid #dc3545;
+}
+
+.transaction-type {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  flex: 1;
+  text-align: left;
+}
+
+.transaction-reason {
+  color: #7f8c8d;
+  flex: 2;
+  text-align: center;
+}
+
+.transaction-time {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  text-align: right;
+  flex: 1;
+}
+
+.no-transactions {
+  color: #7f8c8d;
+  font-style: italic;
+  text-align: center;
+  padding: 30px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  .app-main {
+    gap: 20px;
+  }
+  
+  .savings-display h2 {
+    font-size: 1.5rem;
+  }
+  
+  .voice-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .transaction {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .transaction-amount,
+  .transaction-reason,
+  .transaction-time {
+    flex: none;
+    text-align: left;
+  }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+  .voice-button.listening {
+    animation: none;
+  }
+  
+  .progress-fill {
+    transition: none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
