@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
@@ -37,6 +37,15 @@ if (!fs.existsSync(buildPath) || !fs.existsSync(indexPath)) {
 
 // 静的ファイル配信
 app.use(express.static(buildPath));
+
+// 健全性チェックエンドポイント
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    build: fs.existsSync(buildPath) ? 'ready' : 'missing'
+  });
+});
 
 // OpenAI音声API プロキシ
 app.post('/api/speech', async (req, res) => {
@@ -91,12 +100,35 @@ app.post('/api/speech', async (req, res) => {
 
 // React アプリケーション配信
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  const indexPath = path.join(__dirname, 'build', 'index.html');
+  console.log('🔍 Serving index.html from:', indexPath);
+  
+  // ファイルの存在確認
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    console.error('❌ index.html not found at:', indexPath);
+    console.log('🔍 Files in build directory:', 
+      fs.existsSync(path.join(__dirname, 'build')) ? 
+      fs.readdirSync(path.join(__dirname, 'build')) : 
+      'build directory does not exist'
+    );
+    res.status(404).send(`
+      <h1>🐷 音声貯金箱</h1>
+      <p>アプリのビルドファイルが見つかりません。</p>
+      <p>ビルドが完了するまでお待ちください...</p>
+      <script>setTimeout(() => location.reload(), 5000);</script>
+    `);
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 サーバーが http://localhost:${PORT} で起動しました`);
+const HOST = process.env.HOST || '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 サーバーが http://${HOST}:${PORT} で起動しました`);
   console.log('🎤 音声貯金箱アプリをお楽しみください！');
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔑 OpenAI API: ${process.env.OPENAI_API_KEY ? '設定済み' : '未設定'}`);
 });
 
 module.exports = app;
