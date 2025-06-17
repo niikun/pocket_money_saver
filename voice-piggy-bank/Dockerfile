@@ -15,7 +15,7 @@ COPY . .
 
 # Set environment variables for memory optimization
 ENV NODE_ENV=production
-ENV NODE_OPTIONS="--max-old-space-size=400 --gc-interval=100"
+ENV NODE_OPTIONS="--max-old-space-size=400 --gc-global"
 ENV GENERATE_SOURCEMAP=false
 ENV DISABLE_ESLINT_PLUGIN=true
 
