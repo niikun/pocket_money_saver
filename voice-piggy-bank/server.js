@@ -193,7 +193,7 @@ const server = app.listen(PORT, HOST, () => {
       const { exec } = require('child_process');
       exec('npm run build', { 
         cwd: __dirname,
-        env: { ...process.env, NODE_OPTIONS: '--max-old-space-size=80 --gc-global --optimize-for-size' }
+        env: { ...process.env, NODE_OPTIONS: '--max-old-space-size=200' }
       }, (error, stdout, stderr) => {
         if (error) {
           console.error('❌ Background build failed:', error.message);

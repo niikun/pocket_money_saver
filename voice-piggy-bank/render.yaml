@@ -11,7 +11,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: NODE_OPTIONS
-        value: --max-old-space-size=300 --gc-global
+        value: --max-old-space-size=250
       - key: NPM_CONFIG_PRODUCTION
         value: false
       - key: DISABLE_ESLINT_PLUGIN
