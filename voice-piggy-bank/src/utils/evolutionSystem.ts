@@ -1,4 +1,4 @@
-import { AnimalStage } from '../components/AnimalCharacter';
+import { AnimalStage } from '../components/LightAnimalCharacter';
 
 export const ANIMAL_STAGES: AnimalStage[] = [
   {
